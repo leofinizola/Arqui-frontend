@@ -1,0 +1,14 @@
+.app-container{
+    margin-top: 10px;
+    width: 100%;
+    text-align: center;
+}
+.menu{
+    margin-top: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.btn{
+    margin: 10px 5px;
+}

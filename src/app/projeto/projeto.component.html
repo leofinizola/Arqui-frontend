@@ -1,0 +1,132 @@
+<h1>Projeto</h1>
+<form [formGroup]="form">
+    <div class="form">
+        <div class="bit">
+            <mat-form-field class="form-field" appearance="fill">
+                <mat-label>URL da imagem</mat-label>
+                <input formControlName="url" matInput placeholder="https://servidor.com/imagem.jpg">
+            </mat-form-field>
+            <mat-form-field class="form-field" appearance="fill">
+                <mat-label>RRT</mat-label>
+                <input formControlName="rrt" matInput placeholder="0000001-0">
+            </mat-form-field>
+            <mat-form-field class="form-field" appearance="fill">
+                <mat-label>Endereço</mat-label>
+                <input formControlName="endereco" matInput placeholder="Rua tal, numero, Bairro, Cidade-UF">
+            </mat-form-field>
+        </div>
+        <div class="bit">
+            <mat-form-field class="form-field" appearance="fill">
+                <mat-label>Arquiteto Escolhido</mat-label>
+                <input matInput disabled placeholder="Nome" [value]="clickedArquiteto?clickedArquiteto.nome:'Clique em um arquiteto abaixo'">
+            </mat-form-field>
+            <mat-form-field class="form-field" appearance="fill">
+                <mat-label>Cliente Escolhido</mat-label>
+                <input matInput disabled placeholder="Nome" [value]="clickedCliente?clickedCliente.nome:'Clique em um cliente abaixo'">
+            </mat-form-field>
+        </div>
+    </div> 
+    <button mat-raised-button color="primary" (click)="salvarProjeto()">Salvar</button>
+    
+</form>
+<div class="container">
+
+    <div class="table-container">
+        <h3>Arquitetos</h3>
+        <table mat-table [dataSource]="dataArquitetos" class="table-little">
+            <ng-container matColumnDef="nome">
+              <th mat-header-cell *matHeaderCellDef> Nome </th>
+              <td mat-cell *matCellDef="let element">{{element.nome}}</td>
+            </ng-container>
+          
+            <ng-container matColumnDef="cpf">
+              <th mat-header-cell *matHeaderCellDef> CPF </th>
+              <td mat-cell *matCellDef="let element">{{element.cpf}}</td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr
+                mat-row
+                (click)="setClickedArquiteto(row)"
+                [class.demo-row-is-clicked]="clickedArquiteto===row"
+                *matRowDef="let row; columns: displayedColumns;"
+            ></tr>
+          </table>
+    </div>
+
+    <div class="table-container">
+        <h3>Clientes</h3>
+        <table mat-table [dataSource]="dataClientes" class="table-little">
+            <ng-container matColumnDef="nome">
+              <th mat-header-cell *matHeaderCellDef> Nome </th>
+              <td mat-cell *matCellDef="let element">{{element.nome}}</td>
+            </ng-container>
+          
+            <ng-container matColumnDef="cpf">
+              <th mat-header-cell *matHeaderCellDef> CPF </th>
+              <td mat-cell *matCellDef="let element">{{element.cpf}}</td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr
+                mat-row
+                (click)="setClickedCliente(row)"
+                [class.demo-row-is-clicked]="clickedCliente===row"
+                *matRowDef="let row; columns: displayedColumns;"
+            ></tr>
+          </table>
+    </div>
+</div>
+<hr>
+
+<div>
+    <table mat-table [dataSource]="dataSource" class="table">
+
+        <ng-container matColumnDef="url">
+            <th mat-header-cell *matHeaderCellDef> Imagem </th>
+            <td mat-cell *matCellDef="let element"> <img class="img" [src]="element.url" alt="imagem não encontrada" srcset=""></td>
+        </ng-container>
+
+        <ng-container matColumnDef="rrt">
+            <th mat-header-cell *matHeaderCellDef> RRT </th>
+            <td mat-cell *matCellDef="let element"> {{element.rrt}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="endereco">
+            <th mat-header-cell *matHeaderCellDef> Endereço </th>
+            <td mat-cell *matCellDef="let element">{{element.endereco}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="cliente">
+            <th mat-header-cell *matHeaderCellDef> Nome do Cliente </th>
+            <td mat-cell *matCellDef="let element"> {{element.cliente.nome}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="cpfCliente">
+            <th mat-header-cell *matHeaderCellDef> CPF do Cliente </th>
+            <td mat-cell *matCellDef="let element"> {{element.cliente.cpf}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="arquiteto">
+            <th mat-header-cell *matHeaderCellDef> Nome do Arquiteto Responsável </th>
+            <td mat-cell *matCellDef="let element"> {{element.arquiteto.nome}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="cpfArquiteto">
+            <th mat-header-cell *matHeaderCellDef> CPF do Arquiteto Responsável </th>
+            <td mat-cell *matCellDef="let element"> {{element.arquiteto.cpf}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="remover">
+            <th mat-header-cell *matHeaderCellDef> </th>
+            <td mat-cell *matCellDef="let element"> 
+                <button (click)="deletar(element)" mat-icon-button color="warn">
+                    <mat-icon>delete</mat-icon>
+                </button> 
+            </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumnsPrincipal"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumnsPrincipal;"></tr>
+    </table>
+</div>

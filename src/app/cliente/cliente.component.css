@@ -1,0 +1,17 @@
+.table{
+    width: 100%;
+    text-align: left;
+}
+
+td , th {
+    white-space: normal;
+    word-wrap: break-word;
+    max-width: 150px;
+}
+.form{
+    display: flex;
+    flex-direction: column;
+}
+.mat-form-field{
+    margin: 5px;
+}
