@@ -84,7 +84,7 @@
 
         <ng-container matColumnDef="url">
             <th mat-header-cell *matHeaderCellDef> Imagem </th>
-            <td mat-cell *matCellDef="let element"> <img class="img" [src]="element.url" alt="imagem não encontrada" srcset=""></td>
+            <td mat-cell *matCellDef="let element"> <a [href]="element.url"><img class="img" src="https://www.ufpb.br/propesq/contents/imagens/pdf-icon.png/@@images/image.png" alt="imagem não encontrada" srcset=""></a></td>
         </ng-container>
 
         <ng-container matColumnDef="rrt">
